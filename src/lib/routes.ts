@@ -18,17 +18,11 @@ export const publicRoutes = [
                 public: false,
                 role: 'user',
             },
-            {
-                path: '/test/xxx/edit',
-                name: 'edit test',
-                public: true,
-                role: 'admin',
-            },
              {
                 path: '/test/xxx/edit',
                 name: 'edit test',
                 public: true,
-                role: 'admin-ss',
+                role: 'admin',
                 subRoutes: [
                     {
                         path: '/test/xxx/edit/deep',
@@ -53,27 +47,28 @@ export const publicRoutes = [
 
 export const protectedRoutes = [
     {
-        path: '/admin/posts',
-        name: 'postsssssssssssaaaaaaaa',
+        path: '/admin/manage-shops',
+        name: 'manage shops',
         role: 'admin',
         public: false,
         subRoutes: [
             {
-                path: '/admin/posts/create',
-                name: 'create post',
+                path: '/admin/manage-shops/create',
+                name: 'create shop',
                 public: false,
                 role: 'admin'
             },
             {
-                path: '/admin/posts/edit',
-                name: 'edit postdddddd',
+                path: '/admin/manage-shops/edit',
+                name: 'edit shop',
                 public: false,
+                role: 'admin'
             },
              {
-                path: '/admin/posts/edit',
-                name: 'edit posssssst',
+                path: '/admin/manage-shops/delete',
+                name: 'delete shop',
                 public: false,
-                role: 'user-cc'
+                role: 'admin'
             }
         ]
     },
@@ -89,12 +84,7 @@ export const protectedRoutes = [
                 public: false,
                 role: 'super-admin',
             },
-            {
-                path: '/admin/stuff/edit',
-                name: 'edit stuff',
-                public: false,
-                role: 'admin',
-            },
+            
              {
                 path: '/admin/stuff/edit',
                 name: 'edit stuff',
@@ -121,8 +111,8 @@ export const routes = [
         subRoutes: protectedRoutes
     },
     {
-        path: '/test',
-        name: 'test',
+        path: '/products',
+        name: 'products',
         role: 'user',
         public: true,
         subRoutes: publicRoutes

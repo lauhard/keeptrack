@@ -4,6 +4,7 @@
     import type { Route } from "$lib/routes";
     import { page } from "$app/state";
     import type { User } from "../../app";
+    import { LucideChefHat } from "@lucide/svelte";
     let {
         routes,
         user,
@@ -33,11 +34,12 @@
     const routePath = (v: string) => v.split("/").length - 1;
 </script>
 
-<nav class="${className} main-nav">
+<nav class="${className} main-nav" data-sveltekit-preload-data="tap">
     <ul class="logo-wrapper">
         <li>
             <a href="/">
                 <!-- <img class="main-logo" src="" alt="Tennis Club Ponfeld"> -->
+                <LucideChefHat size="var(--logo-size}" strokeWidth={1.5}></LucideChefHat>
             </a>
         </li>
     </ul>
@@ -109,9 +111,43 @@
         flex: 1;
         z-index: 1200;
         text-transform: capitalize;
+
+        .auth-links,
         .logo-wrapper {
+            min-width: 100px;
+            max-width: fit-content;
+        }
+        .logo-wrapper {
+            --logo-size: 2.5rem;
+            display: grid;
+            place-content: center center;
+            li {
+                display: grid;
+                place-content: center center;
+                border-radius: 50%;
+                width: var(--logo-size);
+                min-width: var(--logo-size);
+                height: var(--logo-size);
+                min-height: var(--logo-size);
+                padding: 2rem;
+                overflow: hidden;
+                a {
+                    width: inherit;
+                    min-width: inherit;
+                    height: inherit;
+                    min-height: inherit;
+                    display: block;
+                    text-align: center;
+                    border-radius: 50%;
+                }
+            }
             li:hover {
                 background-color: transparent;
+                background-color: var(--color-ld-accent-500);
+
+                a {
+                    color: var(--color-ld-white-500);
+                }
             }
         }
 
@@ -161,7 +197,7 @@
             /* Active link style */
             .active {
                 background-color: var(--color-ld-accent-600);
-                >a {
+                > a {
                     color: var(--color-ld-white-300);
                 }
             }
@@ -169,7 +205,7 @@
             /* Reset subroutes positioning and display logic */
             li:has(.sub-routes) {
                 position: relative;
-               
+
                 .sub-routes-container {
                     left: 0rem;
                     top: 2.8rem;
@@ -178,6 +214,11 @@
                     min-width: max-content;
                     width: 100%;
                     height: max-content;
+                    background-color: var(--color-ld-white-300);
+                    border-radius: 10px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     .sub-routes {
                         gap: 0;
                         display: none;
@@ -185,7 +226,6 @@
                         min-width: max-content;
                         height: 100%;
                         width: 100%;
-                       
                     }
                 }
             }
@@ -193,7 +233,7 @@
             /* Hover through routes tree */
             li:hover {
                 background-color: var(--color-ld-accent-600);
-                >a {
+                > a {
                     color: var(--color-ld-white-300);
                 }
                 transition-property: all;
@@ -222,11 +262,10 @@
                             border: 1px solid var(--color-ld-accent-600);
                             margin-bottom: 0.25rem;
                             padding-inline: 0.5rem;
-                           
                         }
-                        li:hover{
-                            >a{
-                                color:var(--color-ld-white-300);
+                        li:hover {
+                            > a {
+                                color: var(--color-ld-white-300);
                             }
                         }
                     }
@@ -248,11 +287,6 @@
                     }
                 }
             }
-        }
-        .auth-links,
-        .logo-wrapper {
-            min-width: 100px;
-            max-width: fit-content;
         }
     }
 </style>

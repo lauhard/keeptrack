@@ -117,7 +117,7 @@
         --color-orange-400: #ffa15e;
         --color-orange-500: #ffa15e;
         --color-orange-600: #ffa15e;
-        --color-orange-700: #ffa15e;
+        --color-orange-700: #d05d0c;
 
         --color-aquamarine-300: #4dd0c8;
         --color-aquamarine-400: #39bfb6;
@@ -200,7 +200,7 @@
     }
 
     body {
-        background-color: var(--bg-color-ld-white-200);
+        background-color: var(--color-ld-white-300);
         color: var(--color-ld-black-500);
         font-family: var(--font-family);
         font-size: var(--base-font-size);
@@ -419,17 +419,17 @@
         flex-direction: column;
         height: 100%;
         min-height: 100vh;
+        width: 100%;
     }
 
     main {
-        max-width: var(--content-width);
-        padding-inline: var(--side);
+        
         flex: 1;
         display: flex;
         flex-direction: column;
         width: 100%;
         height: 100%;
-
+      
         @media (width < 600px) {
             --side: 1rem;
         }
