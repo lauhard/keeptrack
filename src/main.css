@@ -1,5 +1,4 @@
-@import url('$lib/css/satoshi.css');
-@import url('$lib/css/zodiak.css');
+@import url('$lib/fonts/font.css');
 
 @layer reset {
 
@@ -8,6 +7,7 @@
     *::after {
         box-sizing: border-box;
     }
+
 
     html {
         scroll-behavior: smooth;
@@ -18,6 +18,7 @@
         -ms-text-size-adjust: auto;
         -webkit-text-size-adjust: auto;
         text-size-adjust: auto;
+        
     }
 
     html,
@@ -97,7 +98,6 @@
     }
 }
 
-
 @layer base {
     :root {
         /******************** CUSTOM COLORS ********************/
@@ -124,6 +124,12 @@
         --color-aquamarine-500: #22a28d;
         --color-aquamarine-600: #208a81;
         --color-aquamarine-700: #176160;
+
+        --color-red-300: #f53f3f;
+        --color-red-400: #fc2111;
+        --color-red-500: #ff0000;
+        --color-red-600: #e81111;
+        --color-red-700: #b91212;
 
         color-scheme: light dark;
         --color-ld-white-300: light-dark(var(--color-white-300), var(--color-black-300));
@@ -157,8 +163,7 @@
         --bg-color-ld-white-600: light-dark(var(--color-white-600), var(--color-black-600));
         --bg-color-ld-white-700: light-dark(var(--color-white-700), var(--color-black-700));
 
-        --color-alert-danger: #f53f3f;
-
+        --color-alert-danger: var(--color-red-300);
 
 
 
@@ -272,7 +277,10 @@
         }
     }
 
-    button,
+    button {
+        border: none;
+    }
+
     .btn {
         display: block;
         background-color: transparent;
@@ -312,6 +320,7 @@
         box-shadow: none;
         transition: all var(--transition-duration) ease;
         background-color: inherit;
+
         &:focus,
         &:hover,
         &:active {
@@ -403,50 +412,38 @@
 
 @layer base-layout {
     :root {
-        --header-height: 110px;
+        --header-height: 80px;
+        --side: 2rem;
+        --content-width: 1280px;
     }
 
     body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
+        width: 100%;
+        height: 100%;
     }
 
     .app {
-        display: flex;
         flex: 1;
-        align-items: center;
+        display: flex;
         flex-direction: column;
-        height: 100%;
-        min-height: 100vh;
+        align-items: center;
+        position: relative;
+        min-height: 100svh;
+        min-width:nax-content;
         width: 100%;
+        height: 100%;
     }
 
     main {
-        
         flex: 1;
         display: flex;
         flex-direction: column;
+        position: relative;
         width: 100%;
         height: 100%;
-      
         @media (width < 600px) {
             --side: 1rem;
         }
-    }
-
-    header {
-        width: 100%;
-        min-height: var(--header-height);
-    }
-
-    footer {
-        width: 100%;
-        height: 100%;
-        margin-top: auto;
-        text-align: center;
-        padding: 1rem 0;
-        border-top: 1px solid var(--color-ld-white-500);
     }
 }
 
@@ -481,10 +478,13 @@ form:has(a) {
 }
 
 
-
 .btn-login,
+.btn-logout,
+.btn-signup,
 .btn:has(.btn-signup),
-.btn-signup {
+.btn:has(.btn-logout),
+.btn:has(.btn-login) {
+
     font-weight: bold;
     border: 1px solid var(--color-ld-accent-600);
     background-color: var(--color-ld-accent-600);
@@ -492,23 +492,53 @@ form:has(a) {
 
     &:hover {
         background-color: var(--color-ld-accent-500);
+        border-color: var(--color-ld-accent-500);
     }
 }
 
 .btn:has(.btn-signup),
 .btn-signup {
     background-color: var(--color-ld-accent-700);
-    border: 1px solid var(--color-ld-accent-600);
+    border: 1px solid var(--color-ld-accent-700);
+
     &:hover {
         background-color: var(--color-ld-accent-600);
-        color: var(--color-ld-black-500);
+        border-color: var(--color-ld-accent-700);
+        color: var(--color-ld-white-500);
     }
 }
 
-nav:has(a) {
-    @media (width > 600px) {
-        li {
-            border-radius: 30px;
-        }
+.btn:has(.btn-logout),
+.btn-logout {
+    background-color: transparent;
+    border-color: var(--color-red-700);
+    color: var(--color-red-700);
+
+    &:hover {
+        background-color: var(--color-red-700);
+        border-color: var(--color-red-700);
+        color: var(--color-ld-white-500);
+    }
+}
+
+.btn:has(svg) {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+        margin-inline: .5rem;
+    }
+}
+
+a:has(svg) {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+        margin-inline: .5rem;
     }
 }

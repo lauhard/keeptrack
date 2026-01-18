@@ -25,7 +25,7 @@
                     {
                         onSuccess: async (data) => {
                             await invalidateAll();
-                            goto("/admin");
+                            goto("/");
                         },
                         onError: async (error) => {
                             betterAuthError =
@@ -78,7 +78,7 @@
             {/if}
             <a class="forgot-password" href="#">Forgot Password?</a>
             <div class="action-wrapper">
-                <button class="btn-login" type="submit">Login</button>
+                <button class="btn btn-login" type="submit">Login</button>
                 <fieldset class="divider-signup">
                     <legend>OR</legend>
                     <a class="btn signup" href={resolve("/auth/signup")}

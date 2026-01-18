@@ -1,0 +1,41 @@
+/* @import '$lib/components/Navigation/nav.base.css'; */
+.nav,
+.nav.top,
+.nav.bottom {
+    width: 60%;
+    transform: translateX(-50%);
+    left: 50%;
+    border-radius: 30px;
+    @media (width < 900px) {
+        width: 95%;
+    }
+    .auth {
+        .btn {
+            border:none;
+            color: var(--color-ld-white-500);
+            background-color: transparent;
+        }
+
+        .btn-logout {
+            &:hover {
+                color: var(--color-red-600);
+            }
+        }
+
+        .btn-login {
+            &:hover {
+                color: var(--color-ld-accent-500);
+            }
+        }
+    }
+
+    .sub-routes {
+        background-color: var(--color-ld-black-400);
+    }
+
+    .route[data-hasChildren="true"]:hover {
+        &::before {
+            display: none;
+        }
+    }
+}

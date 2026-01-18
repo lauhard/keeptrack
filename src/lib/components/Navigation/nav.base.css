@@ -1,0 +1,278 @@
+    .nav {
+        position: fixed;
+        width: 100%;
+        height: var(--nav-height, 80px);
+        z-index: 500;
+        background-color: var(--color-black-400);
+        clip-path: inset(-9999px -5px -9999px -5px);
+
+        .main-routes {
+            display: grid;
+            grid-template-rows: var(--nav-height, 80px);
+            grid-template-columns: repeat(auto-fill, minmax(0px, max-content));
+
+        }
+
+        .auth {
+            position: absolute;
+            top: 0;
+            transform: translateY(-50%);
+            top: 50%;
+
+            .btn {
+                margin-inline: .8rem;
+            }
+        }
+
+        .route {
+            position: relative;
+            width: fit-content;
+            display: grid;
+            place-content: center center;
+            min-width: 140px;
+            width: 100%;
+        }
+
+        .route:hover {
+            background: var(--color-black-400);
+        }
+
+        .route-link {
+            min-width: 140px;
+            width: 100%;
+            height: 100%;
+            color: var(--color-white-500);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+
+            span {
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: left;
+                flex: 1;
+            }
+
+            icon {
+                margin-right: .5rem;
+                display: flex;
+            }
+        }
+
+        /* the first li */
+        .route[data-index="1"] {
+            /* position: relative; */
+
+            /* the first anchor */
+            >.route-link {
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                top: 0;
+                height: 100%;
+                color: var(--color-white-500);
+            }
+
+            >.route-link:hover {
+                color: var(--color-ld-accent-500);
+            }
+        }
+
+        /* the ul`s */
+        .sub-routes {
+            min-width: 180px;
+            flex: 1;
+            width: 100%;
+            position: absolute;
+            display: none;
+            height: auto;
+
+            .route,
+            .route-link {
+                min-height: calc(var(--nav-height) - (var(--nav-height) * 0.2 ));
+                min-width: inherit;
+                height: 100%;
+                width: 100%;
+            }
+
+            .route-link {
+                position: relative;
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+
+                span {
+                    padding-left: 1.5rem;
+                    justify-content: left;
+                    word-wrap: break-word;
+                    word-break: break-all;
+                    overflow-wrap: break-word;
+                    white-space: normal;
+                    padding-right: 1rem;
+                }
+            }
+        }
+
+        /* shift every ul, but not the first */
+        .route[data-hasChildren="true"]:not([data-index="1"]) {
+            .sub-routes {
+                left: 100%;
+            }
+        }
+
+        /* show every ul (sub-routes block) when hovering the sibling route (li) */
+        .route[data-hasChildren="true"]:hover {
+            >.sub-routes {
+                display: flex;
+
+                li {
+                    >a {
+                        border-left: 0px solid var(--color-ld-accent-500);
+                        transition: all ease-in-out 100ms;
+                    }
+                }
+
+                li:hover {
+                    >a {
+                        color: var(--color-ld-accent-500);
+                        border-left: 5px solid var(--color-ld-accent-500);
+                        background-color: var(--color-black-300);
+                        transition: all ease-in-out 100ms;
+                    }
+                }
+            }
+        }
+
+        .route[data-hasChildren="true"][data-index="1"] {
+            &::before {
+                content: "";
+                position: absolute;
+                background-color: var(--color-black-400);
+                left: -10000%;
+                right: 0;
+                width: 10000vw;
+                height: 0%;
+                /* height: 300%; */
+                /* set to zero*/
+                display: block;
+                /* need to fix that with a dynamic value*/
+                z-index: 0;
+                transition: all ease-in-out 100ms;
+
+            }
+
+        }
+    }
+
+    .nav.top {
+        top: 0%;
+        left:0%;
+        box-shadow: 1px 3px 8px rgba(26, 26, 26, 0.354);
+
+        /* the first li */
+        .route[data-index="1"] {
+
+            /* the first ul */
+            >.sub-routes {
+                margin-top: var(--nav-height);
+                flex-direction: column;
+            }
+        }
+
+        .route[data-hasChildren="true"]:not([data-index="1"]) {
+            .sub-routes {
+                flex-direction: column;
+            }
+        }
+
+        /* create the background for every top level li whith sub-routes (data-hasChildren) */
+        .route[data-hasChildren="true"][data-index="1"] {
+            &::before {
+                top: var(--nav-height);
+            }
+        }
+
+        /* show the background on hover */
+        .route[data-hasChildren="true"][data-index="1"]:hover {
+            &::before {
+                height: var(--bg-height);
+                transition: all ease-in-out 100ms;
+            }
+        }
+    }
+
+    .nav.bottom {
+        bottom: 0;
+
+        /* the first li */
+        .route[data-index="1"] {
+            position: relative;
+
+            /* the first ul */
+            >.sub-routes {
+                flex-direction: column-reverse;
+                bottom: var(--nav-height);
+            }
+        }
+
+        /* shift every ul, but not the first */
+        .route[data-hasChildren="true"]:not([data-index="1"]) {
+            .sub-routes {
+                left: 100%;
+                flex-direction: column-reverse;
+                bottom: 0;
+            }
+        }
+
+        .route[data-hasChildren="true"][data-index="1"] {
+            &::before {
+                bottom: var(--nav-height);
+            }
+        }
+
+        /* create the background for every top level li whith sub-routes (data-hasChildren) */
+        .route[data-hasChildren="true"][data-index="1"]:hover {
+            &::before {
+                content: "";
+                bottom: 100%;
+                height: var(--bg-height);
+                box-shadow: none;
+                transition: all ease-in-out 100ms;
+            }
+        }
+    }
+
+    .nav:has(.main-routes.center) {
+        .auth {
+            right: 0;
+        }
+    }
+
+    .nav:has(.main-routes.right) {
+        .auth {
+            left: 0;
+        }
+    }
+
+    .nav:has(.main-routes.left) {
+        .auth {
+            right: 0;
+        }
+    }
+
+    .main-routes.center {
+        place-content: center center;
+
+    }
+
+    .main-routes.right {
+        place-content: center right;
+    }
+
+    .main-routes.left {
+        place-content: center left;
+    }

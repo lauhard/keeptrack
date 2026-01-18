@@ -1,16 +1,24 @@
 <script lang="ts">
 	import "../main.css";
 	import favicon from "$lib/assets/favicon.svg";
-	import Navigation from "$lib/components/Navigation.svelte";
-	import { routes } from "$lib/routes";
-	import type { User } from "../app";
-	import type { Snippet } from "svelte";
-	import Aside from "$lib/components/Aside.svelte";
-	let { data, children }: { data: { user: User }; children: Snippet } =
-		$props();
+	import { type Snippet } from "svelte";
+	import Footer from "$lib/components/Footer.svelte";
+	import Header from "$lib/components/Header.svelte";
+	import { setUserState } from "$lib/app-state/user.svelte";
+	import type { User } from "$lib/betterauth/auth";
+	let { children, data } = $props<{
+		children: Snippet;
+		data: { user: User };
+	}>();
 
+	let user = $derived(data.user);
 	let innerWidth = $state<number>(0);
-	let showState = $state<boolean>(false);
+	// svelte-ignore state_referenced_locally
+	let userState = setUserState(user);
+
+	$effect(() => {
+		userState?.update(user);
+	});
 </script>
 
 <svelte:head>
@@ -18,18 +26,16 @@
 </svelte:head>
 <svelte:window bind:innerWidth />
 <div class="app">
+	<Header></Header>
 	<main>
-		<header>
-			{#if innerWidth < 600}
-				<Aside bind:showState={showState} {routes} user={data?.user}></Aside>
-			{:else}
-				<Navigation {routes} user={data?.user}></Navigation>
-			{/if}
-		</header>
 		{@render children()}
-		<footer>
-			<!-- basic footer -->
-			<p>KeepTrack &copy; 2026 by ALau</p>
-		</footer>
 	</main>
+	<Footer></Footer>
 </div>
+
+<style>
+	main {
+		max-width: var(--content-width);
+		padding-inline: var(--side);
+	}
+</style>

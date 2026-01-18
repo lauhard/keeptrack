@@ -88,7 +88,7 @@
                 {@render error(betterAuthError)}
             {/if}
             <div class="action-wrapper">
-                <button class="btn-signup" type="submit">Signup</button>
+                <button class="btn btn-signup" type="submit">Signup</button>
             </div>
         </fieldset>
     </form>
